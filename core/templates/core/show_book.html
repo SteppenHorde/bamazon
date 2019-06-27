@@ -19,7 +19,7 @@
       {% endfor %}
       <h3>Тэги:</h3>
       {% for tag in book.tags.all %}
-        <p>{{ tags }}</p>
+        <p>{{ tag }}</p>
       {% endfor %}
       <h3>Обложка:</h3>
       {% if book.img %}
