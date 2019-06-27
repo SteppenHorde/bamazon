@@ -1,0 +1,7 @@
+*.py[co]
+__pycache__
+db.sqlite3
+!.gitignore
+env
+1_bamazon.txt
+2_instascraper.txt
