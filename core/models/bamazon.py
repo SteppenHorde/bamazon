@@ -13,7 +13,7 @@ from django.contrib.auth.models import AbstractUser
 class Author(models.Model):
     first_name = models.CharField(verbose_name='Имя', max_length=50)
     last_name = models.CharField(verbose_name='Фамилия', max_length=50)
-    middle_name = models.CharField(verbose_name='Отчество (если есть)', max_length=50, default='')
+    middle_name = models.CharField(verbose_name='Отчество (если есть)', max_length=50, blank=True, null=True)
     birth_date = models.DateTimeField(verbose_name='Дата рождения')
     death_date = models.DateTimeField(verbose_name='Дата смерти', blank=True, null=True)
     image = models.ImageField(verbose_name='Фото', upload_to='images/authors', blank=True, null=True)
