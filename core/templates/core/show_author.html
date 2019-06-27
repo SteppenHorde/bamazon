@@ -1,0 +1,35 @@
+<!-- templates/core/show_book.html -->
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}{{ author.first_name }} {{ author.last_name }}{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" type="text/css" href="{% static "core/css/main.css" %}">
+{% endblock %}
+
+{% block content %}
+  <div class="content">
+    <div class="author">
+      <h1><strong>{{ author.first_name }} {{ author.last_name }}</strong></h1>
+      <h3>Дата рождения:</h3>
+      <p>{{ author.birth_date }}</p>
+      {% if author.death_date %}
+        <h3>Дата смерти:</h3>
+        <p>{{ author.death_date }}</p>
+      {% endif %}
+      <h3>Фото:</h3>
+      {% if author.image %}
+        <img src="{{ author.image.url }}" alt="Фотография автора {{ author.first_name }} {{ author.last_name }}">
+      {% else %}
+        <p>Нет фото</p>
+      {% endif %}
+      <h3>Биография:</h3>
+      <p>{{ author.bio }}</p>
+      <h2><strong>Книги данного автора:</strong></h2>
+      <div class="row">
+        {% include "core/includes/books_list.html" %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

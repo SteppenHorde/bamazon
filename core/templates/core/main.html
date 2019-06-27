@@ -1,0 +1,15 @@
+<!-- templates/core/main.html -->
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Bamazon{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" type="text/css" href="{% static "core/css/main.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="row main_desc">
+  <h1 class="col-sm-12 main_h"><strong>Добро пожаловать на Bamazon!</strong></h1>
+</div>
+{% endblock %}

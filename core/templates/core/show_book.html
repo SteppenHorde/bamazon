@@ -1,0 +1,36 @@
+<!-- templates/core/show_book.html -->
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" type="text/css" href="{% static "core/css/main.css" %}">
+{% endblock %}
+
+{% block content %}
+  <div class="content">
+    <div class="book">
+      <h1><strong>{{ book.title }}</strong></h1>
+      <p class="post-pub_date">{{ book.pub_date }}</p>
+      <h3>Авторы:</h3>
+      {% for author in book.authors.all %}
+        <a href="{% url "show_author" author.id %}">{{ author }} (ссылка)</a>
+      {% endfor %}
+      <h3>Тэги:</h3>
+      {% for tag in book.tags.all %}
+        <p>{{ tags }}</p>
+      {% endfor %}
+      <h3>Обложка:</h3>
+      {% if book.img %}
+        <img class="book_img" src="{{ book.image.url }}" alt="Обложка книги" width="100%" vspace="10"></img>
+      {% else %}
+        <p>Нет обложки</p>
+      {% endif %}
+      <h3>Описание:</h3>
+      <p>{{ book.desc }}</p>
+      <h3>Цена:</h3>
+      <p>{{ book.price }}</p>
+    </div>
+  </div>
+{% endblock %}

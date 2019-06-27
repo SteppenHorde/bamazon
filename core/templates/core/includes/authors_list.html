@@ -1,0 +1,21 @@
+{% for author in authors_list %}
+  <div class="col-lg-4">
+    <div class="blogs col-md-12">
+        <h2><strong><a href="{% url "show_author" author.id %}">{{ author.first_name }} {{ author.last_name }}</a></strong></h2>
+        <h3>Дата рождения:</h3>
+        <p>{{ author.birth_date }}</p>
+        {% if author.death_date %}
+          <h3>Дата смерти:</h3>
+          <p>{{ author.death_date }}</p>
+        {% endif %}
+        <h3>Фото:</h3>
+        {% if author.image %}
+          <img src="{{ author.image.url }}" alt="Фотография автора {{ author.first_name }} {{ author.last_name }}">
+        {% else %}
+          <p>Нет фото</p>
+        {% endif %}
+        <h3>Описание:</h3>
+        <p>{{ author.bio }}</p>
+    </div>
+  </div>
+{% endfor %}
