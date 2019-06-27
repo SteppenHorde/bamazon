@@ -35,7 +35,7 @@ class Book(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
     title = models.CharField(verbose_name='Название', max_length=100)
     desc = models.TextField(verbose_name='Описание')
-    price = models.DecimalField(verbose_name='Цена', max_digits=8, decimal_places=2, **options) # max = 999999.99
+    price = models.DecimalField(verbose_name='Цена', max_digits=8, decimal_places=2) # max = 999999.99
     pub_date = models.DateTimeField(verbose_name='Дата публикации', default=timezone.now)
 
     def __str__(self):
