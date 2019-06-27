@@ -1,3 +1,2 @@
 django==2.2.2
 pillow==6.0.0
-django-nested-admin==3.2.3
