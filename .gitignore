@@ -5,3 +5,5 @@ db.sqlite3
 env
 1_bamazon.txt
 2_instascraper.txt
+migrations
+images

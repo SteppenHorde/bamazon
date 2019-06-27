@@ -16,8 +16,11 @@ class Author(models.Model):
     middle_name = models.CharField(verbose_name='Отчество (если есть)', max_length=50, default='')
     birth_date = models.DateTimeField(verbose_name='Дата рождения')
     death_date = models.DateTimeField(verbose_name='Дата смерти', blank=True, null=True)
-    image = models.ImageField(verbose_name='Фото', upload_to='media/images/authors', blank=True, null=True)
+    image = models.ImageField(verbose_name='Фото', upload_to='images/authors', blank=True, null=True)
     bio = models.TextField(verbose_name='Биография')
+
+    class Meta:
+        ordering = ['last_name']
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -38,6 +41,9 @@ class Book(models.Model):
     desc = models.TextField(verbose_name='Описание')
     price = models.DecimalField(verbose_name='Цена', max_digits=8, decimal_places=2) # max = 999999.99
     pub_date = models.DateTimeField(verbose_name='Дата публикации', default=timezone.now)
+
+    class Meta:
+        ordering = ['title']
 
     def __str__(self):
         return self.title

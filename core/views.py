@@ -1,6 +1,7 @@
 from django.views import generic, View
+from django.core.paginator import Paginator
 
-from .models.blog import Author, Tag, Book
+from .models.bamazon import Author, Tag, Book
 
 
 
@@ -11,11 +12,21 @@ class Main(generic.TemplateView): # основная страничка мага
 class Books(generic.ListView): # список книг
     template_name = 'core/books.html'
     model = Book
+    context_object_name = 'books_list'
     paginate_by = 2 # пагинация
+
+    def get_queryset(self):
+        all_books_list = Book.objects.all().order_by('-pub_date')
+        books_list = list()
+        for book in all_books_list:
+            authors = book.authors.all()
+            tags = book.tags.all()
+            books_list.append((book, authors, tags))
+
+        return books_list
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        #context['now'] = timezone.now()
         return context
 
 
@@ -32,14 +43,14 @@ class ShowBook(generic.TemplateView): # отдельная книга
         return context
 
 
-class Authors(generic.ListView): # автор
+class Authors(generic.ListView): # авторы
     template_name = 'core/authors.html'
     model = Author
-    paginate_by = 5 # пагинация
+    context_object_name = 'authors_list'
+    paginate_by = 3 # пагинация (в шаблоне 3 колонки)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        #context['now'] = timezone.now()
         return context
 
 
@@ -49,8 +60,15 @@ class ShowAuthor(generic.TemplateView): # отдельный блог со вс�
     def get_context_data(self, *args, **kwargs):
         author_id = kwargs['author_id']
         author = Author.objects.get(pk=author_id)
-        books_list = author.books_set.all().order_by('-pub_date')
+        all_books_list = author.book_set.all().order_by('-pub_date')
+        books_list = list()
+        for book in all_books_list:
+            authors = book.authors.all()
+            tags = book.tags.all()
+            books_list.append((book, authors, tags))
+
         context = {
+            'author': author,
             'books_list': books_list,
         }
 
